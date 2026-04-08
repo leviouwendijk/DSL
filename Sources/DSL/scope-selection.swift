@@ -19,4 +19,22 @@ public extension ScopeSelection {
             Set(scopes.map(\.scope))
         )
     }
+
+    func includes(
+        scope: ScopeIdentifier
+    ) -> Bool {
+        switch self {
+        case .all:
+            return true
+
+        case .scoped(let selected):
+            return selected == scope
+
+        case .unscoped:
+            return false
+
+        case .excluding(let excluded):
+            return !excluded.contains(scope)
+        }
+    }
 }
