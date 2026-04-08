@@ -38,3 +38,23 @@ public extension ScopeSelection {
         }
     }
 }
+
+public extension ScopeSelection {
+    static func excluding(
+        _ scope: ScopeIdentifier
+    ) -> Self {
+        .excluding([scope])
+    }
+
+    static func excluding<Scope: ScopeIdentifying>(
+        _ scope: Scope
+    ) -> Self {
+        .excluding([scope.scope])
+    }
+
+    static func unscopedAnd<Scope: ScopeIdentifying>(
+        _ scopes: [Scope]
+    ) -> Self {
+        .excluding(Set(scopes.map(\.scope)))
+    }
+}
