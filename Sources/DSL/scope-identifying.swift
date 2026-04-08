@@ -1,9 +1,9 @@
 public protocol ScopeIdentifying: Sendable {
-    var scope_id: ScopeIdentifier { get }
+    var scope: ScopeIdentifier { get }
 }
 
 public extension ScopeIdentifying where Self: RawRepresentable, Self.RawValue == String {
-    var scope_id: ScopeIdentifier {
+    var scope: ScopeIdentifier {
         ScopeIdentifier(rawValue)
     }
 }
