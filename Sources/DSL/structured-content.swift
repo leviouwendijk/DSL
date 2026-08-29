@@ -1,4 +1,4 @@
-public struct StructuredContent:
+public indirect enum StructuredContent:
     Sendable,
     Hashable
 {
@@ -43,38 +43,27 @@ public struct StructuredContent:
         case strong([Inline])
     }
 
-    public indirect enum Block:
-        Sendable,
-        Hashable
-    {
-        case paragraph([Inline])
+    case collection([StructuredContent])
 
-        case code(
-            language: String?,
-            source: String
-        )
+    case paragraph([Inline])
 
-        case quote([Block])
+    case code(
+        language: String?,
+        source: String
+    )
 
-        case list(
-            style: ListStyle,
-            items: [[Block]]
-        )
+    case quote(StructuredContent)
 
-        case group(
-            role: Role?,
-            title: [Inline]?,
-            content: [Block]
-        )
-    }
+    case list(
+        style: ListStyle,
+        items: [StructuredContent]
+    )
 
-    public let blocks: [Block]
-
-    public init(
-        blocks: [Block] = []
-    ) {
-        self.blocks = blocks
-    }
+    case group(
+        role: Role?,
+        title: [Inline]?,
+        content: StructuredContent
+    )
 }
 
 public protocol StructuredContentRoleProviding:
