@@ -1,10 +1,12 @@
 public indirect enum StructuredContent:
     Sendable,
+    Codable,
     Hashable
 {
     public struct Role:
         RawRepresentable,
         Sendable,
+        Codable,
         Hashable,
         ExpressibleByStringLiteral
     {
@@ -27,6 +29,7 @@ public indirect enum StructuredContent:
 
     public enum ListStyle:
         Sendable,
+        Codable,
         Hashable
     {
         case unordered
@@ -35,6 +38,7 @@ public indirect enum StructuredContent:
 
     public indirect enum Inline:
         Sendable,
+        Codable,
         Hashable
     {
         case text(String)
