@@ -68,6 +68,12 @@ public indirect enum StructuredContent:
         title: [Inline]?,
         content: StructuredContent
     )
+
+    /// Rows of cells under a header row, read column by column.
+    case table(
+        header: [StructuredContent],
+        rows: [[StructuredContent]]
+    )
 }
 
 public protocol StructuredContentRoleProviding:
