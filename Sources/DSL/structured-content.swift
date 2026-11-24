@@ -45,6 +45,15 @@ public indirect enum StructuredContent:
         case code(String)
         case emphasis([Inline])
         case strong([Inline])
+        case link(
+            target: LinkTarget,
+            content: [Inline]
+        )
+        case citation(
+            key: CitationKey,
+            locators: [ReferenceLocator]
+        )
+        case footnote(StructuredContent)
     }
 
     case collection([StructuredContent])
@@ -73,6 +82,29 @@ public indirect enum StructuredContent:
     case table(
         header: [StructuredContent],
         rows: [[StructuredContent]]
+    )
+
+    case heading(
+        level: Int,
+        anchor: AnchorKey?,
+        content: [Inline]
+    )
+
+    case image(
+        asset: AssetKey,
+        alt: String
+    )
+
+    case definitions([Definition])
+
+    case listing(Listing)
+
+    /// A construct only `target` can render; every other target renders
+    /// `fallback`.
+    case native(
+        target: NativeTarget,
+        key: NativeKey,
+        fallback: StructuredContent
     )
 }
 
