@@ -1,4 +1,4 @@
-public struct AnyHTMLClass: Sendable, Hashable, Codable, ExpressibleByStringLiteral {
+public struct AnyHTMLClass: Sendable, Hashable, Codable {
     public let rawValue: String
 
     public init(
@@ -8,13 +8,13 @@ public struct AnyHTMLClass: Sendable, Hashable, Codable, ExpressibleByStringLite
     }
 
     public init(
-        stringLiteral value: String
+        rawValue: String
     ) {
-        self.init(value)
+        self.init(rawValue)
     }
 }
 
-public struct AnyHTMLID: Sendable, Hashable, Codable, ExpressibleByStringLiteral {
+public struct AnyHTMLID: Sendable, Hashable, Codable {
     public let rawValue: String
 
     public init(
@@ -24,9 +24,9 @@ public struct AnyHTMLID: Sendable, Hashable, Codable, ExpressibleByStringLiteral
     }
 
     public init(
-        stringLiteral value: String
+        rawValue: String
     ) {
-        self.init(value)
+        self.init(rawValue)
     }
 }
 
@@ -48,7 +48,7 @@ public struct AnyCSSVariable: Sendable, Hashable, Codable, ExpressibleByStringLi
     }
 }
 
-public struct HTMLClass<Namespace>: Sendable, Hashable, Codable, ExpressibleByStringLiteral {
+public struct HTMLClass<Namespace>: Sendable, Hashable, Codable {
     public let rawValue: String
 
     public init(
@@ -58,9 +58,9 @@ public struct HTMLClass<Namespace>: Sendable, Hashable, Codable, ExpressibleBySt
     }
 
     public init(
-        stringLiteral value: String
+        rawValue: String
     ) {
-        self.init(value)
+        self.init(rawValue)
     }
 
     public var erased: AnyHTMLClass {
@@ -68,7 +68,7 @@ public struct HTMLClass<Namespace>: Sendable, Hashable, Codable, ExpressibleBySt
     }
 }
 
-public struct HTMLID<Namespace>: Sendable, Hashable, Codable, ExpressibleByStringLiteral {
+public struct HTMLID<Namespace>: Sendable, Hashable, Codable {
     public let rawValue: String
 
     public init(
@@ -78,9 +78,9 @@ public struct HTMLID<Namespace>: Sendable, Hashable, Codable, ExpressibleByStrin
     }
 
     public init(
-        stringLiteral value: String
+        rawValue: String
     ) {
-        self.init(value)
+        self.init(rawValue)
     }
 
     public var erased: AnyHTMLID {

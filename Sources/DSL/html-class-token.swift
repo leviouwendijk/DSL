@@ -1,7 +1,6 @@
 public enum HTMLClassToken:
     Sendable,
-    Hashable,
-    ExpressibleByStringLiteral
+    Hashable
 {
     case semantic(AnyHTMLClass)
     case raw(String)
@@ -10,12 +9,6 @@ public enum HTMLClassToken:
         _ value: AnyHTMLClass
     ) {
         self = .semantic(value)
-    }
-
-    public init(
-        stringLiteral value: String
-    ) {
-        self = .raw(value)
     }
 
     public var rawValue: String {
