@@ -46,3 +46,50 @@ public extension StructuredContent.Inline {
         }
     }
 }
+
+public extension StructuredContent {
+    /// The words of a block on one line, for content that has to sit inline
+    /// (footnotes, search text). Tables, definitions and listings are left out.
+    var plainText: String {
+        switch self {
+        case .collection(let children):
+            return children
+                .map(\.plainText)
+                .filter { !$0.isEmpty }
+                .joined(separator: " ")
+        case .paragraph(let inline),
+             .heading(_, _, let inline):
+            return inline.map(\.plainText).joined()
+        case .quote(let inner, let attribution):
+            let source = attribution.map {
+                " — " + $0.map(\.plainText).joined()
+            } ?? ""
+            return inner.plainText + source
+        case .group(_, _, let inner),
+             .native(_, _, let inner):
+            return inner.plainText
+        case .figure(_, let content, let caption):
+            return [
+                content.plainText,
+                caption.map { $0.map(\.plainText).joined() } ?? "",
+            ]
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+        case .verse(let lines):
+            return lines
+                .map { $0.map(\.plainText).joined() }
+                .joined(separator: " / ")
+        case .list(_, let items):
+            return items.map(\.plainText).joined(separator: "; ")
+        case .image(_, let alt):
+            return alt
+        case .code(_, let source):
+            return source
+        case .table,
+             .definitions,
+             .listing,
+             .rule:
+            return ""
+        }
+    }
+}
