@@ -65,7 +65,11 @@ public indirect enum StructuredContent:
         source: String
     )
 
-    case quote(StructuredContent)
+    /// Quoted content, with the source it is attributed to.
+    case quote(
+        StructuredContent,
+        attribution: [Inline]? = nil
+    )
 
     case list(
         style: ListStyle,
@@ -91,9 +95,22 @@ public indirect enum StructuredContent:
     )
 
     case image(
-        asset: AssetKey,
+        source: ImageSource,
         alt: String
     )
+
+    /// Content with a caption, numbered by the figure enumeration.
+    case figure(
+        anchor: AnchorKey?,
+        content: StructuredContent,
+        caption: [Inline]?
+    )
+
+    /// Lines kept as written: breaks and leading spaces are content.
+    case verse([[Inline]])
+
+    /// A section break inside running text.
+    case rule
 
     case definitions([Definition])
 

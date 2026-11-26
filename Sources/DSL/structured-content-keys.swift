@@ -122,6 +122,17 @@ public extension StructuredContent {
         case external(String)
     }
 
+    /// Where an image comes from: an asset in a manifest, or a URL the
+    /// source already names (Markdown, imported content).
+    enum ImageSource:
+        Sendable,
+        Codable,
+        Hashable
+    {
+        case asset(AssetKey)
+        case external(String)
+    }
+
     struct Definition:
         Sendable,
         Codable,
@@ -173,6 +184,13 @@ public extension StructuredContent.Role {
     static var caution: Self {
         .init(
             rawValue: "caution"
+        )
+    }
+
+    /// A quotation that opens a piece or a section.
+    static var epigraph: Self {
+        .init(
+            rawValue: "epigraph"
         )
     }
 }

@@ -10,22 +10,6 @@ public enum StructuredContentFallback {
         return "[" + parts.joined(separator: ", ") + "]"
     }
 
-    /// The URL a link target has without a resolver: external URLs and
-    /// in-document anchors. Pages and assets need a route table or manifest.
-    public static func url(
-        _ target: StructuredContent.LinkTarget
-    ) -> String? {
-        switch target {
-        case .external(let url):
-            return url
-        case .anchor(let anchor):
-            return "#" + anchor.rawValue
-        case .page,
-             .asset:
-            return nil
-        }
-    }
-
     /// Heading levels outside 1...6 are clamped.
     public static func headingLevel(
         _ level: Int
