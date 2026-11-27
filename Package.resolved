@@ -1,0 +1,24 @@
+{
+  "originHash" : "30f9a20ad8b6c12cdc260273e6d2c0d01b5f33335f6d28110df83af217cac717",
+  "pins" : [
+    {
+      "identity" : "atomos",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-lco/Atomos.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "857fa1b7d1975fe17d52e21c154f92ba5e696be3"
+      }
+    },
+    {
+      "identity" : "primitives",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-lco/Primitives.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "05431e58c105831a155d4a3759309ff1e1e30a88"
+      }
+    }
+  ],
+  "version" : 3
+}
