@@ -43,6 +43,8 @@ public extension StructuredContent.Inline {
             )
         case .footnote:
             return ""
+        case .noteReference(let number, _):
+            return "[\(number)]"
         }
     }
 }
@@ -88,6 +90,7 @@ public extension StructuredContent {
         case .table,
              .definitions,
              .listing,
+             .notes,
              .rule:
             return ""
         }

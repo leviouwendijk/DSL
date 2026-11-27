@@ -150,6 +150,61 @@ public extension StructuredContent {
         }
     }
 
+    /// A footnote or bibliography entry, with the occurrence numbers that
+    /// point at it.
+    struct Note:
+        Sendable,
+        Codable,
+        Hashable
+    {
+        /// Where `noteReference`s link to.
+        public let anchor: AnchorKey
+        public let pointers: [Int]
+        public let content: StructuredContent
+        /// Occurrences that named a locator, grouped by locator set.
+        public let uses: [NoteUse]
+
+        public init(
+            anchor: AnchorKey,
+            pointers: [Int],
+            content: StructuredContent,
+            uses: [NoteUse] = []
+        ) {
+            self.anchor = anchor
+            self.pointers = pointers
+            self.content = content
+            self.uses = uses
+        }
+
+        /// `[1, 4]`.
+        public var label: String {
+            "[" + pointers.map(String.init).joined(separator: ", ") + "]"
+        }
+    }
+
+    struct NoteUse:
+        Sendable,
+        Codable,
+        Hashable
+    {
+        public let pointers: [Int]
+        public let locators: [ReferenceLocator]
+
+        public init(
+            pointers: [Int],
+            locators: [ReferenceLocator]
+        ) {
+            self.pointers = pointers
+            self.locators = locators
+        }
+
+        /// `p. 12 [2, 5]`.
+        public var rendered: String {
+            locators.map(\.rendered).joined(separator: ", ")
+                + " [" + pointers.map(String.init).joined(separator: ", ") + "]"
+        }
+    }
+
     /// Where a document enumeration prints its list.
     enum Listing:
         Sendable,

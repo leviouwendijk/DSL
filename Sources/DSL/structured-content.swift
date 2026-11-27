@@ -54,6 +54,12 @@ public indirect enum StructuredContent:
             locators: [ReferenceLocator]
         )
         case footnote(StructuredContent)
+        /// A numbered mark pointing at a note: what enumeration lowers a
+        /// citation or footnote occurrence to.
+        case noteReference(
+            number: Int,
+            anchor: AnchorKey
+        )
     }
 
     case collection([StructuredContent])
@@ -115,6 +121,10 @@ public indirect enum StructuredContent:
     case definitions([Definition])
 
     case listing(Listing)
+
+    /// Numbered notes (footnotes, bibliography entries): what enumeration
+    /// lowers a footnote or bibliography listing to.
+    case notes([Note])
 
     /// A construct only `target` can render; every other target renders
     /// `fallback`.
